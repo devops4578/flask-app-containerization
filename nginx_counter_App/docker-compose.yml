@@ -1,0 +1,16 @@
+services:
+  counter-app:
+    build: ../counter_app
+    ports:
+      - "5002:5000"
+    depends_on:
+      - redis
+  redis:
+    image: redis:alpine
+
+  nginx:
+    build: .
+    ports:
+      - "8060:80"
+    depends_on:
+      - counter-app
